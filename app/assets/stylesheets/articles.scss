@@ -1,3 +1,33 @@
 // Place all the styles related to the Articles controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.article-tile {
+    padding: 20px;
+    margin: 20px 0;
+    display: flex;
+    height: 200px;
+    border-radius: 20px;
+    box-shadow: 0px 0px 20px 5px rgb(231, 231, 231);
+    box-sizing: border-box;
+
+    &__img {
+        height: 160px;
+        width: 320px;
+        align-self: center;
+        overflow: hidden;
+        border-radius: 10px;
+    }
+
+    &__body {
+        padding-left: 20px;
+    }
+}
+
+.article {
+    margin-top: 30px;
+    &__img {
+        display: block;
+        margin: 10px auto;
+    }
+}

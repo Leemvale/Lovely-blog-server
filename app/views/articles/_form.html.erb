@@ -23,6 +23,11 @@
     <%= form.label :text %><br>
     <%= form.text_area :text %>
   </p>
+
+  <div>
+    <%= form.label :image %><br>
+    <%= form.file_field :image, multiple: false, direct_upload: true %>
+  </div>
  
   <p>
     <%= form.submit %>
