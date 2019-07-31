@@ -5,6 +5,12 @@ Rails.application.routes.draw do
   resources :articles do
     resources :comments
   end
- 
+
+  resources :users, :only => [:index, :show] do
+    resources :articles
+  end
+
+  resource :friendships, :only => [:create]
+
   root 'welcome#index'
 end

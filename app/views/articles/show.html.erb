@@ -13,7 +13,7 @@
 
     <p>
       <strong>Author:</strong>
-      <%= @article.author.nickname %>
+      <%= link_to @article.author.nickname, user_path(@article.author) %>
     </p>
   </section>
 
