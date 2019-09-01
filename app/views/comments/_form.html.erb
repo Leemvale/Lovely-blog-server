@@ -1,5 +1,5 @@
 
-<%= form_with(model: [ @article, @article.comments.build ], local: true) do |form| %>
+<%= form_with(model: [ commentable, commentable.comments.build ], local: true) do |form| %>
   <p>
     <%= form.label :body %><br>
     <%= form.text_area :body %>

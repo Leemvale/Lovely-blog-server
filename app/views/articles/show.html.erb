@@ -13,7 +13,7 @@
 
     <p>
       <strong>Author:</strong>
-      <%= link_to @article.author.nickname, user_path(@article.author) %>
+      <%= link_to @article.author.nickname, profile_path(@article.author) %>
     </p>
   </section>
 
@@ -22,7 +22,7 @@
     <%= render @article.comments %>
 
     <h2>Add a comment:</h2>
-     <%= render 'comments/form' %>
+     <%= render 'comments/form', :commentable => @article %>
   </section>
 
   <% if current_user.id == @article.author.id %>

@@ -1,16 +1,17 @@
 Rails.application.routes.draw do
-  devise_for :users, controllers: { sessions: 'users/sessions' }
+  devise_for :users, controllers: { sessions: 'users/sessions', registrations: "users/registrations" }
   get 'welcome/index'
 
   resources :articles do
     resources :comments
   end
 
-  resources :users, :only => [:index, :show] do
+  resources :profiles, :only => [:index, :show] do
     resources :articles
+    resources :comments
   end
 
-  resource :friendships, :only => [:create]
+  resource :friendships, :only => [:create, :destroy]
 
   root 'welcome#index'
 end
