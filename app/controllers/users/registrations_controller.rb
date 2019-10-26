@@ -3,22 +3,24 @@
 class Users::RegistrationsController < Devise::RegistrationsController
   # before_action :configure_sign_up_params, only: [:create]
   # before_action :configure_account_update_params, only: [:update]
+  
+  respond_to :json
+
+  def create
+    build_resource(sign_up_params)
+
+    if resource.save
+      @profile = Profile.new
+      @profile.user_id = resource.id
+      @profile.save
+    end
+    render_resource(resource)
+  end
 
   # GET /resource/sign_up
   # def new
   #   super
   # end
-
-  # POST /resource
-  def create
-    super do
-      if resource.save
-        @profile = Profile.new
-        @profile.user_id = resource.id
-        @profile.save
-      end
-    end
-  end
 
   # GET /resource/edit
   # def edit

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_09_01_105507) do
+ActiveRecord::Schema.define(version: 2019_10_26_170350) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -59,6 +59,11 @@ ActiveRecord::Schema.define(version: 2019_09_01_105507) do
     t.integer "friend_id"
     t.index ["friend_id"], name: "index_friendships_on_friend_id"
     t.index ["user_id"], name: "index_friendships_on_user_id"
+  end
+
+  create_table "jwt_blacklist", force: :cascade do |t|
+    t.string "jti", null: false
+    t.index ["jti"], name: "index_jwt_blacklist_on_jti"
   end
 
   create_table "profiles", force: :cascade do |t|
