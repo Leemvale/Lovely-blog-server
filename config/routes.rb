@@ -1,3 +1,20 @@
 Rails.application.routes.draw do
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+  devise_for :users, controllers: { sessions: 'users/sessions', registrations: "users/registrations" }
+  # get 'welcome/index'
+
+  # resources :articles do
+  #   resources :comments
+  # end
+
+  # resources :profiles, :only => [:index, :show] do
+  #   resources :articles
+  #   resources :comments
+  # end
+
+  # resource :friendships, :only => [:create, :destroy]
+
+  mount Blog::Base => '/'
+  mount GrapeSwaggerRails::Engine => '/swagger'
+
+  # root 'welcome#index'
 end

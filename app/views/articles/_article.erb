@@ -1,0 +1,19 @@
+<article class="article-tile">
+  <div class="article-tile__img">
+      <%= image_tag(url_for(article.image)) if article.image.attached?%>
+  </div>
+  <div class="article-tile__body">
+    <h2 class="article-tile__title"><%= article.title %></h2>
+    <p class="article-tile__text"><%= article.text %></p>
+    <div class="article-tile__actions">
+      <%= link_to 'Show', article_path(article) %>
+
+      <% if current_user.id == article.author.id %>
+        <%= link_to 'Edit', edit_article_path(article) %>
+        <%= link_to 'Destroy', article_path(article),
+                              method: :delete,
+                              data: { confirm: 'Are you sure?' } %>
+      <%end%>
+    </div>
+  </div>
+</article>

@@ -1,0 +1,18 @@
+
+<p>
+  <strong>Commenter:</strong>
+  <%= comment.commenter.nickname %>
+</p>
+
+<p>
+  <strong>Comment:</strong>
+  <%= comment.body %>
+</p>
+
+<p>
+  <% if current_user.id == comment.commenter.id %>
+    <%= link_to 'Destroy Comment', [comment.commentable, comment],
+                method: :delete,
+                data: { confirm: 'Are you sure?' } %>
+  <% end %>
+</p>

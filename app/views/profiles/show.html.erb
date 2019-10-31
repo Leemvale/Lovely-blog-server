@@ -1,0 +1,38 @@
+<article class="user-page">
+  <header>
+    <h2>
+      <%= @profile.user.nickname %>
+    </h2>
+
+    <% if current_user.id != @profile.user.id && !current_user.has_friend?(@profile.user)%>
+      <%= button_to 'Add to friends', friendships_path(:friend_profile => @profile, :friend_id => @profile.user), method: :post %>
+    <%end%>
+
+    <% if current_user.id != @profile.user.id && current_user.has_friend?(@profile.user)%>
+      <%= button_to 'Remove from friends', friendships_path(:friend_profile => @profile, :friend_id => @profile.user), method: :delete %>
+    <%end%>
+  </header>
+
+  <section>
+    <h3>Friends</h3>
+    <ul>
+    <% @profile.user.friends.each do |friend| %>
+      <li><%= friend.nickname %></li>
+    <% end %>
+    </ul>
+  </section>
+
+  <section>
+    <h3>Articles<h3>
+    <%= render @profile.user.articles %>
+  </section>
+
+  <section>
+    <h3>Comments</h3>
+    <%= render @profile.comments %>
+
+    <h4>Add a comment:</h4>
+    <%= render 'comments/form', :commentable => @profile %>
+  </section>
+    
+<article>

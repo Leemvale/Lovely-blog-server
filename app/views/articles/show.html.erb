@@ -1,0 +1,32 @@
+<article class="article">
+  <section>
+    <h2>
+      <%= @article.title %>
+    </h2>
+
+    <%= image_tag(url_for(@article.image), :class => "article__img") if @article.image.attached?%>
+
+    <p>
+      <strong>Text:</strong>
+      <%= @article.text %>
+    </p>
+
+    <p>
+      <strong>Author:</strong>
+      <%= link_to @article.author.nickname, profile_path(@article.author) %>
+    </p>
+  </section>
+
+  <section>
+    <h2>Comments</h2>
+    <%= render @article.comments %>
+
+    <h2>Add a comment:</h2>
+     <%= render 'comments/form', :commentable => @article %>
+  </section>
+
+  <% if current_user.id == @article.author.id %>
+    <%= link_to 'Edit', edit_article_path(@article) %> |
+  <%end%>
+  <%= link_to 'Back', articles_path %>
+<article>
