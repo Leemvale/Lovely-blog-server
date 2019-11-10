@@ -38,12 +38,12 @@ gem 'bootsnap', '>= 1.1.0', require: false
 
 gem 'rack-cors'
 gem 'grape'
+gem 'grape-entity'
 gem 'grape-swagger'
 gem 'grape-swagger-rails'
 
 gem 'devise'
 gem 'devise-jwt'
-gem 'jwt'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

@@ -6,9 +6,14 @@ module Blog
       def authenticate_user!
         env["warden"].authenticate!
       end
+
+      def current_user
+        env["warden"].user
+      end
     end
     
     mount Blog::V1::Articles
+    mount Blog::V1::Profiles
 
     add_swagger_documentation
   end
