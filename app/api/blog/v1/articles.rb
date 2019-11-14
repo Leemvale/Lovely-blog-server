@@ -6,9 +6,8 @@ module Blog
       prefix :api
 
       resource :articles do
-        desc 'Return list of articles'
+        desc 'Return list of all articles'
         get do
-          authenticate_user!
           articles = Article.all
           present articles
         end
@@ -19,7 +18,7 @@ module Blog
         end
         route_param :id do
           get do
-            Article.find(params[:id])
+            present Article.find(params[:id]), with: Blog::Entities::Article
           end
         end
 
@@ -32,10 +31,50 @@ module Blog
           end
         end
         post do
+          authenticate_user!
           article = Article.new(params[:article])
           article.author = current_user
           if article.save
-            article
+            present article
+          end
+        end
+
+        desc 'Update an article'
+        params do
+          requires :id, type: Integer, desc: 'Article id'
+          requires :article, type: Hash do
+            optional :title, type: String, desc: 'Title'
+            optional :text, type: String, desc: 'Text'
+            optional :image, type: String, desc: 'Image'
+          end
+        end
+        put do
+          authenticate_user!
+          article = Article.find(params[:id])
+
+          if current_user.id == article.author.id
+            if article.update(params[:article])
+              present article
+            else
+              error!(:internal_server_error)
+            end
+          else
+            error!(:forbidden) 
+          end
+        end
+
+        desc 'Delete an article'
+        params do
+          requires :id, type: Integer, desc: 'ID'
+        end
+        put do
+          authenticate_user!
+          article = Article.find(params[:id])
+
+          if current_user.id == article.author.id
+            article.destroy
+          else
+            error!(:forbidden) 
           end
         end
       end

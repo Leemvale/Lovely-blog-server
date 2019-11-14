@@ -5,7 +5,7 @@ module Blog
       expose :title
       expose :text
       expose :image_url
-      expose :author
+      expose :author, using: Blog::Entities::Author
     end
   end
 end
